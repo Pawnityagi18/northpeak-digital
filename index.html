@@ -483,6 +483,11 @@
           <li><a href="#contact">Contact</a></li>
         </ul>
 
+        <!-- ADMIN SIGN IN BUTTON -->
+        <button id="adminLoginBtn" class="btn btn-outline" onclick="openAdminModal()" style="padding: 0.5rem 1rem; font-size: 0.85rem;">
+          Admin Sign In
+        </button>
+
         <!-- HAMBURGER MENU BUTTON -->
         <button id="hamburgerToggle" class="hamburger-btn" aria-label="Open Product Categories Drawer" aria-expanded="false" aria-controls="categoryDrawer">
           <span></span>
@@ -875,6 +880,31 @@
     </div>
   </div>
 
+  <!-- ADMIN SIGN IN MODAL -->
+  <div id="adminModal" class="modal-backdrop" role="dialog" aria-modal="true" aria-label="Admin Sign In Modal">
+    <div class="modal-content" style="max-width: 420px; padding: 2rem;">
+      <button onclick="closeAdminModal()" class="modal-close" aria-label="Close Admin Modal">✕</button>
+      <div style="margin-bottom: 1.5rem;">
+        <span class="proof-label">Security Portal</span>
+        <h3 style="font-size: 1.5rem; font-weight: 800; color: var(--text-main); margin-top: 0.25rem;">Admin Sign In</h3>
+        <p style="color: var(--text-muted); font-size: 0.88rem;">Access the NorthPeak control panel.</p>
+      </div>
+
+      <form id="adminLoginForm" onsubmit="handleAdminLogin(event)">
+        <div class="form-group">
+          <label for="adminUser">Username</label>
+          <input type="text" id="adminUser" class="form-control" placeholder="e.g. admin" required>
+        </div>
+        <div class="form-group">
+          <label for="adminPass">Password</label>
+          <input type="password" id="adminPass" class="form-control" placeholder="••••••••" required>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 0.5rem;">Sign In</button>
+        <div id="adminError" class="error-msg" style="margin-top: 0.8rem; text-align: center;">Invalid username or password!</div>
+      </form>
+    </div>
+  </div>
+
   <!-- FOOTER MANDATORY LINK -->
   <footer>
     <div class="container">
@@ -1043,6 +1073,37 @@
         tech: ["Lighthouse", "Web Vitals API", "Native JS", "CSS Grid"]
       }
     };
+
+    // --- ADMIN MODAL FUNCTIONS ---
+    function openAdminModal() {
+      document.getElementById('adminModal').classList.add('active');
+    }
+
+    function closeAdminModal() {
+      document.getElementById('adminModal').classList.remove('active');
+      document.getElementById('adminError').style.display = 'none';
+    }
+
+    function handleAdminLogin(event) {
+      event.preventDefault();
+      const user = document.getElementById('adminUser').value;
+      const pass = document.getElementById('adminPass').value;
+
+      // Demo Admin Credentials: admin / admin123
+      if (user === 'admin' && pass === 'admin123') {
+        alert('Login Successful! Welcome, Admin.');
+        closeAdminModal();
+        
+        const btn = document.getElementById('adminLoginBtn');
+        if (btn) {
+          btn.innerText = 'Admin Active ✓';
+          btn.style.background = 'var(--primary-gradient)';
+          btn.style.color = '#ffffff';
+        }
+      } else {
+        document.getElementById('adminError').style.display = 'block';
+      }
+    }
 
     // --- DRAWER & FOCUS TRAPPING ---
     const hamburgerBtn = document.getElementById('hamburgerToggle');
@@ -1335,6 +1396,7 @@
         if (e.key === 'Escape') {
           closeShowcase();
           closeRegisterModal();
+          closeAdminModal();
           closeDrawer();
           closeChatbot();
         }

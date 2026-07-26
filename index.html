@@ -1,18 +1,1397 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NorthPeak Digital | Scaling High-Growth Brands</title>
+  <meta name="description" content="NorthPeak Digital is a full-service agency specializing in custom web engineering, performance marketing, and digital transformation.">
+  
+  <style>
+    /* DESIGN SYSTEM & HIGH-CONTRAST PALETTE */
+    :root {
+      --bg-main: #f8fafc;
+      --bg-surface: #ffffff;
+      --bg-card: rgba(255, 255, 255, 0.94);
+      
+      --primary: #4f46e5;
+      --primary-cyan: #0284c7;
+      --primary-gradient: linear-gradient(135deg, #4f46e5 0%, #0284c7 100%);
+      --accent-emerald: #047857;
+      
+      --text-main: #0f172a;
+      --text-muted: #334155;
+      
+      --border-color: #cbd5e1;
+      --border-glow: #6366f1;
+      --card-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.1), 0 8px 10px -6px rgba(15, 23, 42, 0.06);
+      
+      --font-sans: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      color-scheme: light;
+    }
+
+    body {
+      background-color: var(--bg-main);
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* ACCESSIBILITY FOCUS VISIBLE STATE */
+    :focus-visible {
+      outline: 3px solid var(--primary) !important;
+      outline-offset: 3px !important;
+    }
+
+    /* GPU-ACCELERATED BACKGROUND ORBS */
+    .bg-animation {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: -1;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.45;
+      will-change: transform;
+      animation: floatOrb 18s ease-in-out infinite alternate;
+    }
+
+    .orb-1 {
+      width: 450px;
+      height: 450px;
+      background: rgba(79, 70, 229, 0.2);
+      top: -100px;
+      left: -100px;
+    }
+
+    .orb-2 {
+      width: 480px;
+      height: 480px;
+      background: rgba(2, 132, 199, 0.2);
+      bottom: -150px;
+      right: -100px;
+    }
+
+    @keyframes floatOrb {
+      0% { transform: translate3d(0, 0, 0) scale(1); }
+      50% { transform: translate3d(50px, 40px, 0) scale(1.08); }
+      100% { transform: translate3d(-40px, 60px, 0) scale(0.95); }
+    }
+
+    /* SCROLL REVEAL ANIMATIONS */
+    .reveal {
+      opacity: 0;
+      transform: translate3d(0, 25px, 0);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+      will-change: opacity, transform;
+    }
+
+    .reveal.active {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    section {
+      padding: 6rem 0;
+      position: relative;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .hero {
+      padding: 8rem 0 6rem;
+      text-align: center;
+      background: linear-gradient(180deg, rgba(248, 250, 252, 0.75) 0%, rgba(248, 250, 252, 0.9) 100%),
+                  url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1200&fm=webp&q=75');
+    }
+
+    #services {
+      background: linear-gradient(180deg, rgba(241, 245, 249, 0.8) 0%, rgba(226, 232, 240, 0.9) 100%),
+                  url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1200&fm=webp&q=75');
+    }
+
+    #results {
+      background: linear-gradient(180deg, rgba(238, 242, 255, 0.8) 0%, rgba(224, 231, 255, 0.9) 100%),
+                  url('https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=1200&fm=webp&q=75');
+    }
+
+    #pricing {
+      background: linear-gradient(180deg, rgba(248, 250, 252, 0.8) 0%, rgba(241, 245, 249, 0.9) 100%),
+                  url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&fm=webp&q=75');
+    }
+
+    #contact {
+      background: linear-gradient(180deg, rgba(224, 231, 255, 0.8) 0%, rgba(238, 242, 255, 0.92) 100%),
+                  url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&fm=webp&q=75');
+    }
+
+    .gradient-text {
+      background: var(--primary-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: inline-block;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 3.5rem;
+    }
+
+    .section-title h2 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin-bottom: 0.75rem;
+      color: var(--text-main);
+    }
+
+    .section-title p {
+      color: var(--text-muted);
+      font-size: 1.125rem;
+      max-width: 620px;
+      margin: 0 auto;
+      font-weight: 600;
+    }
+
+    /* BUTTONS */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.875rem 1.85rem;
+      font-weight: 700;
+      font-size: 0.95rem;
+      border-radius: 0.6rem;
+      text-decoration: none;
+      transition: var(--transition);
+      cursor: pointer;
+      border: none;
+      gap: 0.5rem;
+    }
+
+    .btn-primary {
+      background: var(--primary-gradient);
+      color: #ffffff;
+      box-shadow: 0 4px 15px rgba(79, 70, 229, 0.3);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(79, 70, 229, 0.45);
+    }
+
+    .btn-outline {
+      background: rgba(255, 255, 255, 0.95);
+      color: var(--text-main);
+      border: 1px solid var(--border-color);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+    }
+
+    .btn-outline:hover {
+      background: #ffffff;
+      border-color: var(--primary);
+      transform: translateY(-2px);
+    }
+
+    .btn-proof {
+      margin-top: auto;
+      background: #e0e7ff;
+      color: var(--primary);
+      border: 1px solid #c7d2fe;
+      padding: 0.75rem 1rem;
+      font-size: 0.875rem;
+      font-weight: 700;
+      border-radius: 0.5rem;
+      width: 100%;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .btn-proof:hover {
+      background: var(--primary-gradient);
+      color: #ffffff;
+      border-color: transparent;
+      transform: translateY(-2px);
+    }
+
+    /* HEADER & HAMBURGER NAVIGATION */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background-color: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .nav-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 4.5rem;
+    }
+
+    .logo {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: var(--text-main);
+      text-decoration: none;
+      letter-spacing: -0.02em;
+    }
+
+    .logo span { color: var(--primary-cyan); }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+      align-items: center;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.95rem;
+      transition: var(--transition);
+    }
+
+    .nav-links a:hover { color: var(--primary); }
+
+    .hamburger-btn {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      width: 2.25rem;
+      height: 2.25rem;
+      background: #f1f5f9;
+      border: 1px solid var(--border-color);
+      border-radius: 0.5rem;
+      padding: 0.4rem;
+      cursor: pointer;
+      z-index: 102;
+    }
+
+    .hamburger-btn span {
+      width: 100%;
+      height: 2.5px;
+      background-color: var(--text-main);
+      border-radius: 2px;
+      transition: var(--transition);
+    }
+
+    .hamburger-btn.active span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+    .hamburger-btn.active span:nth-child(2) { opacity: 0; }
+    .hamburger-btn.active span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+    /* DRAWER */
+    .drawer-overlay {
+      position: fixed;
+      top: 0; left: 0; width: 100vw; height: 100vh;
+      background: rgba(15, 23, 42, 0.5);
+      backdrop-filter: blur(6px);
+      z-index: 100; opacity: 0; visibility: hidden;
+      transition: var(--transition);
+    }
+
+    .drawer-overlay.active { opacity: 1; visibility: visible; }
+
+    .drawer {
+      position: fixed; top: 0; right: -380px; width: 360px; height: 100vh;
+      background: #ffffff; z-index: 101; padding: 5.5rem 2rem 2rem;
+      box-shadow: -10px 0 30px rgba(0, 0, 0, 0.15);
+      transition: right 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex; flex-direction: column; overflow-y: auto;
+    }
+
+    .drawer.active { right: 0; }
+    .drawer-title { font-size: 1.1rem; font-weight: 800; color: var(--primary); margin-bottom: 1.25rem; padding-bottom: 0.5rem; border-bottom: 2px solid #e0e0e0; }
+    .drawer-category-list { list-style: none; margin-bottom: 2rem; }
+    .drawer-category-list li { margin-bottom: 0.75rem; }
+    .drawer-category-list a { display: flex; align-items: center; justify-content: space-between; padding: 0.85rem 1rem; background: #f8fafc; border: 1px solid var(--border-color); border-radius: 0.6rem; text-decoration: none; color: var(--text-main); font-weight: 700; }
+
+    /* FLOATING AI CHAT BOT WIDGET */
+    .chatbot-trigger-btn {
+      position: fixed; bottom: 1.75rem; right: 1.75rem;
+      width: 3.6rem; height: 3.6rem; border-radius: 50%;
+      background: var(--primary-gradient); color: #ffffff;
+      border: none; font-size: 1.75rem;
+      box-shadow: 0 10px 25px rgba(79, 70, 229, 0.4);
+      cursor: pointer; z-index: 99; transition: var(--transition);
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    .chatbot-window {
+      position: fixed; bottom: 6rem; right: 1.75rem;
+      width: 360px; height: 480px; background: #ffffff;
+      border: 1px solid var(--border-color); border-radius: 1.25rem;
+      box-shadow: 0 20px 45px rgba(15, 23, 42, 0.2);
+      z-index: 99; display: flex; flex-direction: column;
+      opacity: 0; visibility: hidden; transform: translateY(20px) scale(0.95);
+      transition: var(--transition); overflow: hidden;
+    }
+
+    .chatbot-window.active { opacity: 1; visibility: visible; transform: translateY(0) scale(1); }
+    .chatbot-header { background: var(--primary-gradient); color: #ffffff; padding: 1rem 1.25rem; display: flex; align-items: center; justify-content: space-between; }
+    .chatbot-title-info { display: flex; align-items: center; gap: 0.65rem; }
+    .online-dot { width: 0.6rem; height: 0.6rem; background: #34d399; border-radius: 50%; }
+    .chatbot-close-btn { background: rgba(255, 255, 255, 0.2); border: none; color: #ffffff; font-weight: 800; width: 1.8rem; height: 1.8rem; border-radius: 50%; cursor: pointer; }
+    
+    .chatbot-messages { flex-grow: 1; padding: 1rem; overflow-y: auto; display: flex; flex-direction: column; gap: 0.75rem; background: #f8fafc; }
+    .chat-msg { max-width: 86%; padding: 0.75rem 1rem; border-radius: 1rem; font-size: 0.85rem; line-height: 1.45; }
+    .bot-msg { background: #ffffff; color: var(--text-main); border: 1px solid var(--border-color); align-self: flex-start; border-bottom-left-radius: 0.2rem; }
+    .user-msg { background: var(--primary-gradient); color: #ffffff; align-self: flex-end; border-bottom-right-radius: 0.2rem; font-weight: 600; }
+    
+    .chatbot-input-bar { display: flex; padding: 0.75rem; background: #ffffff; border-top: 1px solid var(--border-color); gap: 0.5rem; }
+    .chatbot-input-bar input { flex-grow: 1; border: 1px solid #cbd5e1; border-radius: 0.6rem; padding: 0.55rem 0.85rem; font-size: 0.85rem; outline: none; }
+
+    /* CUSTOMIZER MODAL ELEMENTS */
+    .business-size-grid, .theme-grid, .vibe-grid { display: grid; gap: 0.75rem; margin: 0.75rem 0 1.25rem; }
+    .business-size-grid { grid-template-columns: repeat(3, 1fr); }
+    .theme-grid { grid-template-columns: repeat(4, 1fr); }
+    .vibe-grid { grid-template-columns: repeat(3, 1fr); }
+
+    .size-card, .theme-card, .vibe-card {
+      border: 2px solid var(--border-color); border-radius: 0.75rem;
+      padding: 0.85rem 0.5rem; text-align: center; cursor: pointer;
+      transition: var(--transition); background: #ffffff;
+    }
+
+    .size-card:hover, .size-card.selected,
+    .theme-card:hover, .theme-card.selected,
+    .vibe-card:hover, .vibe-card.selected {
+      border-color: var(--primary); background: #f0f3ff;
+    }
+
+    .category-checkboxes { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.75rem; margin: 0.75rem 0 1.25rem; }
+    .checkbox-tile { display: flex; align-items: center; gap: 0.6rem; padding: 0.75rem 1rem; background: #f8fafc; border: 1px solid var(--border-color); border-radius: 0.6rem; font-size: 0.85rem; font-weight: 700; cursor: pointer; }
+
+    .summary-badge-bar { background: #1e293b; color: #ffffff; border-radius: 0.75rem; padding: 1.25rem; display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.25rem; }
+
+    .badge { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.4rem 1.1rem; background: #e0e7ff; color: var(--primary); border: 1px solid #c7d2fe; border-radius: 2rem; font-size: 0.85rem; font-weight: 700; margin-bottom: 1.75rem; }
+    .badge-dot { width: 0.5rem; height: 0.5rem; background-color: var(--accent-emerald); border-radius: 50%; }
+
+    .hero h1 { font-size: 3.75rem; line-height: 1.12; font-weight: 800; letter-spacing: -0.035em; margin-bottom: 1.5rem; color: var(--text-main); }
+    .hero p { font-size: 1.25rem; color: var(--text-muted); margin-bottom: 2.75rem; max-width: 720px; margin-left: auto; margin-right: auto; font-weight: 500; }
+    .hero-ctas { display: flex; gap: 1.25rem; justify-content: center; }
+
+    .services-grid, .results-grid, .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.75rem; }
+    
+    .card, .testimonial-card, .pricing-card {
+      background: var(--bg-card); border: 1px solid var(--border-color);
+      border-radius: 1rem; padding: 2.25rem; display: flex; flex-direction: column;
+      box-shadow: var(--card-shadow); backdrop-filter: blur(12px); transition: transform 0.3s ease;
+    }
+
+    .card:hover, .pricing-card:hover { transform: translateY(-5px); }
+    .card-icon { width: 3.25rem; height: 3.25rem; background: #e0e7ff; border: 1px solid #c7d2fe; border-radius: 0.75rem; display: flex; align-items: center; justify-content: center; margin-bottom: 1.5rem; font-size: 1.6rem; }
+    .work-proof { margin: 1.5rem 0; background: #f1f5f9; padding: 0.85rem 1rem; border-radius: 0.6rem; border-left: 3px solid var(--accent-emerald); }
+    .proof-label { font-size: 0.7rem; font-weight: 800; text-transform: uppercase; color: var(--accent-emerald); margin-bottom: 0.25rem; }
+
+    .stat-badge { font-size: 2.5rem; font-weight: 800; margin-bottom: 0.75rem; background: var(--primary-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .price { font-size: 3rem; font-weight: 800; margin: 1.25rem 0; letter-spacing: -0.03em; color: var(--text-main); }
+    .features-list { list-style: none; margin: 1.5rem 0 2.5rem; flex-grow: 1; }
+    .features-list li { margin-bottom: 0.85rem; color: var(--text-muted); font-size: 0.95rem; display: flex; align-items: center; gap: 0.6rem; font-weight: 500; }
+    .features-list li::before { content: "✓"; color: var(--accent-emerald); font-weight: 800; }
+
+    .contact-container { max-width: 680px; margin: 0 auto; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 1.25rem; padding: 3rem; box-shadow: var(--card-shadow); }
+    .form-group { margin-bottom: 1.5rem; }
+    .form-group label { display: block; margin-bottom: 0.5rem; font-weight: 700; font-size: 0.9rem; color: var(--text-main); }
+    .form-control { width: 100%; padding: 0.95rem 1.15rem; background: #ffffff; border: 1px solid #cbd5e1; border-radius: 0.6rem; color: var(--text-main); font-size: 1rem; }
+
+    .error-msg { color: #dc2626; font-size: 0.8rem; margin-top: 0.4rem; display: none; }
+    .form-group.error .form-control { border-color: #dc2626; }
+    .form-group.error .error-msg { display: block; }
+
+    .form-status { margin-top: 1.25rem; padding: 1rem; border-radius: 0.6rem; font-size: 0.95rem; text-align: center; display: none; }
+    .form-status.success { display: block; background: #ecfdf5; color: var(--accent-emerald); border: 1px solid #a7f3d0; }
+
+    .modal-backdrop {
+      position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+      background: rgba(15, 23, 42, 0.65); backdrop-filter: blur(12px);
+      display: flex; align-items: center; justify-content: center;
+      z-index: 1000; opacity: 0; visibility: hidden; transition: var(--transition);
+    }
+
+    .modal-backdrop.active { opacity: 1; visibility: visible; }
+    .modal-content { background: #ffffff; border: 1px solid var(--border-color); border-radius: 1.25rem; width: 92%; max-width: 940px; max-height: 88vh; overflow-y: auto; padding: 2.5rem; position: relative; }
+    .modal-close { position: absolute; top: 1.5rem; right: 1.5rem; background: #f1f5f9; border: 1px solid var(--border-color); border-radius: 0.5rem; padding: 0.5rem 1rem; font-weight: 700; cursor: pointer; }
+
+    footer { background: #ffffff; border-top: 1px solid var(--border-color); padding: 3.5rem 0; text-align: center; }
+    .credit-line { margin-top: 1.25rem; font-size: 0.95rem; color: var(--text-muted); font-weight: 500; }
+    .credit-line a { color: var(--primary); text-decoration: none; font-weight: 700; }
+
+    @media (max-width: 900px) {
+      .services-grid, .results-grid, .pricing-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 640px) {
+      .hero h1 { font-size: 2.35rem; }
+      .services-grid, .results-grid, .pricing-grid, .business-size-grid, .category-checkboxes, .theme-grid, .vibe-grid { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+      .hero-ctas { flex-direction: column; }
+      .btn { width: 100%; }
+      .chatbot-window { width: 310px; right: 1rem; bottom: 5.5rem; }
+    }
+  </style>
 </head>
 <body>
-    <form>
-        <label for="name">
-            Name:  <input type="text">
-        </label>
 
-        
+  <!-- BACKGROUND ANIMATION ORBS -->
+  <div class="bg-animation" aria-hidden="true">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+  </div>
+
+  <!-- HEADER / NAVIGATION -->
+  <header id="navbar">
+    <div class="container nav-container">
+      <a href="#" class="logo" aria-label="NorthPeak Digital Home">NorthPeak<span>.</span></a>
+      
+      <nav style="display: flex; align-items: center; gap: 1.5rem;" aria-label="Main Navigation">
+        <ul class="nav-links">
+          <li><a href="#services">Services</a></li>
+          <li><a href="#results">Results</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+
+        <!-- HAMBURGER MENU BUTTON -->
+        <button id="hamburgerToggle" class="hamburger-btn" aria-label="Open Product Categories Drawer" aria-expanded="false" aria-controls="categoryDrawer">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- OFF-CANVAS HAMBURGER DRAWER -->
+  <div id="drawerOverlay" class="drawer-overlay" aria-hidden="true"></div>
+  <div id="categoryDrawer" class="drawer" role="dialog" aria-modal="true" aria-label="Categories Drawer">
+    <div class="drawer-title">Product & Service Categories</div>
+    <ul class="drawer-category-list">
+      <li><a href="#services" onclick="closeDrawer()"><span>⚡ Custom Web Apps</span> <span>→</span></a></li>
+      <li><a href="#services" onclick="closeDrawer()"><span>📈 Growth Marketing</span> <span>→</span></a></li>
+      <li><a href="#services" onclick="closeDrawer()"><span>🎯 SEO & Content Engines</span> <span>→</span></a></li>
+      <li><a href="#services" onclick="closeDrawer()"><span>🎨 UI/UX Architecture</span> <span>→</span></a></li>
+      <li><a href="#services" onclick="closeDrawer()"><span>⚙️ API Integration Middleware</span> <span>→</span></a></li>
+      <li><a href="#services" onclick="closeDrawer()"><span>🔒 Performance Audits</span> <span>→</span></a></li>
+    </ul>
+
+    <div class="drawer-cta-box">
+      <h4>Client Registration</h4>
+      <p>Choose theme name, business size, and design vibes to customize your product pay tier.</p>
+      <button class="btn btn-primary" onclick="closeDrawer(); openRegisterModal();" style="width: 100%;">Customize Theme & Register →</button>
+    </div>
+  </div>
+
+  <!-- FLOATING AI CHAT BOT WIDGET -->
+  <button id="chatbotToggle" class="chatbot-trigger-btn" aria-label="Open AI Assistant Chatbot" aria-expanded="false" aria-controls="chatbotContainer">🤖</button>
+  <div id="chatbotContainer" class="chatbot-window" role="region" aria-label="PeakAI Chatbot Assistant">
+    <div class="chatbot-header">
+      <div class="chatbot-title-info">
+        <span class="online-dot" aria-hidden="true"></span>
+        <div>
+          <h4>PeakAI Assistant</h4>
+          <p>NorthPeak Digital AI Bot</p>
+        </div>
+      </div>
+      <button id="chatbotClose" class="chatbot-close-btn" aria-label="Close Chatbot">✕</button>
+    </div>
+    <div id="chatMessages" class="chatbot-messages" aria-live="polite">
+      <div class="chat-msg bot-msg">
+        👋 Welcome! I am <strong>PeakAI</strong>. We engineer high-performance websites and digital portals for all industries, including <strong>educational firms</strong> and enterprise platforms. Ask me about our <strong>services</strong>, <strong>pricing</strong>, or <strong>custom themes</strong>!
+      </div>
+    </div>
+    <form id="chatForm" class="chatbot-input-bar">
+      <label for="chatInput" class="sr-only" style="display:none;">Type your message</label>
+      <input type="text" id="chatInput" placeholder="Type your message..." required autocomplete="off">
+      <button type="submit" class="btn-send-chat">Send</button>
     </form>
-    <script src="app.js"></script>
+  </div>
+
+  <!-- HERO SECTION -->
+  <section class="hero">
+    <div class="container hero-content reveal">
+      <div class="badge">
+        <span class="badge-dot" aria-hidden="true"></span>
+        Next-Gen Digital Engineering
+      </div>
+      <h1>We build high-performance digital engines for <span class="gradient-text">high-growth brands.</span></h1>
+      <p>NorthPeak Digital pairs modern tech stacks with data-driven performance marketing to scale enterprise brands beyond traditional limits.</p>
+      <div class="hero-ctas">
+        <button onclick="openRegisterModal()" class="btn btn-primary">Customize Product Theme & Register →</button>
+        <a href="#services" class="btn btn-outline">Explore Capabilities</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES SECTION WITH WORK PROOF SHOWCASE -->
+  <section id="services">
+    <div class="container">
+      <div class="section-title reveal">
+        <h2>Core <span class="gradient-text">Capabilities</span></h2>
+        <p>End-to-end expertise backed by proven, measurable project outcomes.</p>
+      </div>
+      <div class="services-grid">
+        
+        <!-- CARD 1 -->
+        <div class="card reveal">
+          <div class="card-icon" aria-hidden="true">⚡</div>
+          <h3>Custom Web Apps</h3>
+          <p>High-speed, scalable web applications engineered using modern React, Next.js, and Node ecosystems.</p>
+          <div class="work-proof">
+            <span class="proof-label">Verified Result</span>
+            <p class="proof-text">Rebuilt FinTech platform leading to a <strong>70% faster load speed</strong>.</p>
+          </div>
+          <button class="btn btn-proof" data-service="webapps">View What We Built →</button>
+        </div>
+
+        <!-- CARD 2 -->
+        <div class="card reveal">
+          <div class="card-icon" aria-hidden="true">📈</div>
+          <h3>Growth Marketing</h3>
+          <p>Data-informed omnichannel acquisition campaigns that lower CAC and maximize long-term LTV.</p>
+          <div class="work-proof">
+            <span class="proof-label">Verified Result</span>
+            <p class="proof-text">Scaled SaaS client to <strong>4.2x ROAS</strong> in under 90 days.</p>
+          </div>
+          <button class="btn btn-proof" data-service="growth">View What We Built →</button>
+        </div>
+
+        <!-- CARD 3 -->
+        <div class="card reveal">
+          <div class="card-icon" aria-hidden="true">🎯</div>
+          <h3>SEO & Content Engine</h3>
+          <p>Technical SEO architecture and content strategies engineered to dominate high-intent search rankings.</p>
+          <div class="work-proof">
+            <span class="proof-label">Verified Result</span>
+            <p class="proof-text">Grew organic traffic from <strong>15k to 180k monthly visits</strong>.</p>
+          </div>
+          <button class="btn btn-proof" data-service="seo">View What We Built →</button>
+        </div>
+
+        <!-- CARD 4 -->
+        <div class="card reveal">
+          <div class="card-icon" aria-hidden="true">🎨</div>
+          <h3>UI/UX Architecture</h3>
+          <p>Human-centered digital product design prioritized for conversions and effortless user retention.</p>
+          <div class="work-proof">
+            <span class="proof-label">Verified Result</span>
+            <p class="proof-text">Redesigned checkout funnel increasing overall <strong>conversions by 31.4%</strong>.</p>
+          </div>
+          <button class="btn btn-proof" data-service="uiux">View What We Built →</button>
+        </div>
+
+        <!-- CARD 5 -->
+        <div class="card reveal">
+          <div class="card-icon" aria-hidden="true">⚙️</div>
+          <h3>API Integration</h3>
+          <p>Seamless middleware and API pipelines connecting your existing tools into a unified data stack.</p>
+          <div class="work-proof">
+            <span class="proof-label">Verified Result</span>
+            <p class="proof-text">Saved <strong>120+ operational hours/month</strong> in manual syncing.</p>
+          </div>
+          <button class="btn btn-proof" data-service="api">View What We Built →</button>
+        </div>
+
+        <!-- CARD 6 -->
+        <div class="card reveal">
+          <div class="card-icon" aria-hidden="true">🔒</div>
+          <h3>Performance Audits</h3>
+          <p>In-depth security, accessibility (a11y), and Core Web Vitals optimization for maximum speed.</p>
+          <div class="work-proof">
+            <span class="proof-label">Verified Result</span>
+            <p class="proof-text">Achieved <strong>100/100 Lighthouse score</strong> across all pages.</p>
+          </div>
+          <button class="btn btn-proof" data-service="audit">View What We Built →</button>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- RESULTS SECTION -->
+  <section id="results">
+    <div class="container">
+      <div class="section-title reveal">
+        <h2>Proven <span class="gradient-text">Business Impact</span></h2>
+        <p>Don't take our word for it — here is what happens when engineering meets execution.</p>
+      </div>
+      <div class="results-grid">
+        <div class="testimonial-card reveal">
+          <div>
+            <div class="stat-badge counter" data-target="312" data-prefix="+" data-suffix="%">+0%</div>
+            <p class="quote">"NorthPeak overhauled our web application architecture. Our load times dropped by 70%, directly triggering a massive surge in mobile conversions."</p>
+          </div>
+          <div class="client-info">
+            <h4>Sarah Jenkins</h4>
+            <p>CTO, FinScale Global</p>
+          </div>
+        </div>
+        <div class="testimonial-card reveal">
+          <div>
+            <div class="stat-badge counter" data-target="4.2" data-decimals="1" data-suffix="x">0x</div>
+            <p class="quote">"Their growth marketing and technical SEO team scaled our organic customer acquisition completely organically in less than six months."</p>
+          </div>
+          <div class="client-info">
+            <h4>David Vance</h4>
+            <p>VP Growth, CloudAura</p>
+          </div>
+        </div>
+        <div class="testimonial-card reveal">
+          <div>
+            <div class="stat-badge counter" data-target="1.8" data-decimals="1" data-prefix="$" data-suffix="M">$0M</div>
+            <p class="quote">"The team's execution standard is unmatched. They built our customer portal ahead of schedule and zero bug reports on launch day."</p>
+          </div>
+          <div class="client-info">
+            <h4>Elena Rostova</h4>
+            <p>Founder, Nexus Health</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING SECTION -->
+  <section id="pricing">
+    <div class="container">
+      <div class="section-title reveal">
+        <h2>Transparent <span class="gradient-text">Investments</span></h2>
+        <p>Flexible engagement models tailored to your company's growth stage.</p>
+      </div>
+      <div class="pricing-grid">
+        <div class="pricing-card reveal">
+          <h3>Sprint (Small Business)</h3>
+          <p style="color: var(--text-muted); font-size: 0.9rem;">Ideal for rapid MVPs & UX overhauls.</p>
+          <div class="price">$4,900 <span>/ project</span></div>
+          <ul class="features-list">
+            <li>Single-page custom application</li>
+            <li>Fully responsive UI/UX</li>
+            <li>Core Web Vitals optimization</li>
+            <li>Basic SEO setup</li>
+            <li>2-week turnaround</li>
+          </ul>
+          <button onclick="openRegisterModal('small')" class="btn btn-outline">Select Small Business</button>
+        </div>
+
+        <div class="pricing-card featured reveal">
+          <div class="featured-badge">Most Popular</div>
+          <h3>Scale (Mid-Market)</h3>
+          <p style="color: var(--text-muted); font-size: 0.9rem;">Complete custom web platform development.</p>
+          <div class="price">$9,500 <span>/ project</span></div>
+          <ul class="features-list">
+            <li>Multi-page dynamic web app</li>
+            <li>CMS or API integration</li>
+            <li>Advanced analytics dashboard</li>
+            <li>Technical SEO architecture</li>
+            <li>Dedicated project manager</li>
+            <li>30 days post-launch support</li>
+          </ul>
+          <button onclick="openRegisterModal('mid')" class="btn btn-primary">Select Mid-Market</button>
+        </div>
+
+        <div class="pricing-card reveal">
+          <h3>Enterprise (Big Business)</h3>
+          <p style="color: var(--text-muted); font-size: 0.9rem;">Full-suite engineering & growth team retainer.</p>
+          <div class="price">$14,000 <span>/ mo</span></div>
+          <ul class="features-list">
+            <li>Dedicated full-stack engineering team</li>
+            <li>Omnichannel performance marketing</li>
+            <li>24/7 SLA monitoring & support</li>
+            <li>Continuous UX optimization</li>
+            <li>Custom API & backend pipelines</li>
+          </ul>
+          <button onclick="openRegisterModal('big')" class="btn btn-outline">Select Enterprise</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT FORM SECTION -->
+  <section id="contact">
+    <div class="container">
+      <div class="section-title reveal">
+        <h2>Let's Build <span class="gradient-text">Something Great</span></h2>
+        <p>Send us a brief outline of your project and our team will get back to you in 24 hours.</p>
+      </div>
+      <div class="contact-container reveal">
+        <form id="contactForm" novalidate>
+          <div class="form-group" id="group-name">
+            <label for="name">Full Name *</label>
+            <input type="text" id="name" class="form-control" placeholder="e.g. Jane Doe">
+            <div class="error-msg" id="name-error">Please enter your full name.</div>
+          </div>
+
+          <div class="form-group" id="group-email">
+            <label for="email">Work Email *</label>
+            <input type="email" id="email" class="form-control" placeholder="jane@company.com">
+            <div class="error-msg" id="email-error">Please enter a valid work email address.</div>
+          </div>
+
+          <div class="form-group" id="group-message">
+            <label for="message">Project Overview *</label>
+            <textarea id="message" class="form-control" placeholder="Tell us about your timeline, scope, and goals..."></textarea>
+            <div class="error-msg" id="msg-error">Message must be at least 10 characters long.</div>
+          </div>
+
+          <button type="submit" class="btn btn-primary" style="width: 100%;">Send Proposal Request</button>
+          <div id="formStatus" class="form-status" aria-live="polite"></div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- SHOWCASE MODAL -->
+  <div id="proofModal" class="modal-backdrop" role="dialog" aria-modal="true" aria-label="Project Showcase Preview">
+    <div class="modal-content">
+      <button id="modalClose" class="modal-close" aria-label="Close Showcase Modal">✕ Close Preview</button>
+      <div id="modalBody"></div>
+    </div>
+  </div>
+
+  <!-- CLIENT REGISTRATION MODAL -->
+  <div id="registerModal" class="modal-backdrop" role="dialog" aria-modal="true" aria-label="Client Registration Form">
+    <div class="modal-content" style="max-width: 800px;">
+      <button onclick="closeRegisterModal()" class="modal-close" aria-label="Close Registration Modal">✕ Close</button>
+      
+      <div style="margin-bottom: 1.25rem;">
+        <span class="proof-label">Tailored Client Registration</span>
+        <h3 style="font-size: 1.75rem; font-weight: 800; color: var(--text-main); margin-top: 0.25rem;">Design Your Custom Product & Estimate</h3>
+        <p style="color: var(--text-muted); font-size: 0.92rem;">Choose your brand theme name, design vibe, and service categories so we build a product tailored exclusively to your vision.</p>
+      </div>
+
+      <form id="clientRegisterForm" novalidate>
+        <fieldset style="border:none; margin:0; padding:0;">
+          <legend style="font-weight: 700; font-size: 0.88rem; color: var(--text-main); margin-bottom: 0.5rem;">1. Select Business Size Tier:</legend>
+          <div class="business-size-grid">
+            <div class="size-card selected" id="tier-small" onclick="selectBusinessSize('small', 4900)" tabindex="0">
+              <h5>Small Business</h5>
+              <p>Startup / MVP</p>
+              <span class="tag">Base $4,900</span>
+            </div>
+            <div class="size-card" id="tier-mid" onclick="selectBusinessSize('mid', 9500)" tabindex="0">
+              <h5>Mid-Market</h5>
+              <p>Scaling Revenue</p>
+              <span class="tag">Base $9,500</span>
+            </div>
+            <div class="size-card" id="tier-big" onclick="selectBusinessSize('big', 14000)" tabindex="0">
+              <h5>Big Business</h5>
+              <p>Enterprise</p>
+              <span class="tag">Base $14,000</span>
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset style="border:none; margin:0; padding:0;">
+          <legend style="font-weight: 700; font-size: 0.88rem; color: var(--text-main); margin-bottom: 0.5rem;">2. Choose Your Preferred Brand Theme Name & Palette:</legend>
+          <div class="theme-grid">
+            <div class="theme-card selected" id="theme-midnight" onclick="selectTheme('Midnight Dark')" tabindex="0">
+              <span>Midnight Dark</span>
+            </div>
+            <div class="theme-card" id="theme-minimal" onclick="selectTheme('Crisp Light')" tabindex="0">
+              <span>Crisp Light</span>
+            </div>
+            <div class="theme-card" id="theme-cyber" onclick="selectTheme('Cyber Neon')" tabindex="0">
+              <span>Cyber Neon</span>
+            </div>
+            <div class="theme-card" id="theme-emerald" onclick="selectTheme('Royal Gold')" tabindex="0">
+              <span>Royal Gold</span>
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset style="border:none; margin:0; padding:0;">
+          <legend style="font-weight: 700; font-size: 0.88rem; color: var(--text-main); margin-bottom: 0.5rem;">3. Design Vibe & Interactive Aesthetic:</legend>
+          <div class="vibe-grid">
+            <div class="vibe-card selected" id="vibe-speed" onclick="selectVibe('Speed & Conversion First')" tabindex="0">⚡ Speed & Conversion</div>
+            <div class="vibe-card" id="vibe-glass" onclick="selectVibe('Glassmorphism & Smooth Motion')" tabindex="0">✨ Glass & Animations</div>
+            <div class="vibe-card" id="vibe-3d" onclick="selectVibe('3D & Modern Interactive')" tabindex="0">🚀 3D & Modern Tech</div>
+          </div>
+        </fieldset>
+
+        <fieldset style="border:none; margin:0; padding:0;">
+          <legend style="font-weight: 700; font-size: 0.88rem; color: var(--text-main); margin-bottom: 0.5rem;">4. Select Included Service Categories:</legend>
+          <div class="category-checkboxes">
+            <label class="checkbox-tile"><input type="checkbox" class="cat-check" value="1200" checked onchange="calculateCustomPay()"> Custom Web Application</label>
+            <label class="checkbox-tile"><input type="checkbox" class="cat-check" value="800" checked onchange="calculateCustomPay()"> Growth & Ad Marketing</label>
+            <label class="checkbox-tile"><input type="checkbox" class="cat-check" value="650" onchange="calculateCustomPay()"> Technical SEO Engine</label>
+            <label class="checkbox-tile"><input type="checkbox" class="cat-check" value="950" onchange="calculateCustomPay()"> UI/UX Design System</label>
+            <label class="checkbox-tile"><input type="checkbox" class="cat-check" value="700" onchange="calculateCustomPay()"> API / Database Middleware</label>
+            <label class="checkbox-tile"><input type="checkbox" class="cat-check" value="500" onchange="calculateCustomPay()"> Speed & Security Audit</label>
+          </div>
+        </fieldset>
+
+        <div class="summary-badge-bar" aria-live="polite">
+          <div class="summary-details">
+            <h6>Tailored Product Summary</h6>
+            <p id="summaryText">Small Business • Theme: Midnight Dark • Vibe: Speed & Conversion</p>
+          </div>
+          <div class="amount" id="dynamicTotal">$6,900</div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-bottom: 1.25rem;">
+          <div class="form-group" id="reg-group-name" style="margin-bottom:0;">
+            <label for="regName">Company Name *</label>
+            <input type="text" id="regName" class="form-control" placeholder="e.g. Acme Corp">
+          </div>
+          <div class="form-group" id="reg-group-email" style="margin-bottom:0;">
+            <label for="regEmail">Work Email *</label>
+            <input type="email" id="regEmail" class="form-control" placeholder="client@company.com">
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="width: 100%;">Confirm Choices & Complete Registration →</button>
+        <div id="regStatus" class="form-status" aria-live="polite"></div>
+      </form>
+    </div>
+  </div>
+
+  <!-- FOOTER MANDATORY LINK -->
+  <footer>
+    <div class="container">
+      <a href="#" class="logo" style="justify-content: center; margin-bottom: 1rem;">NorthPeak<span>.</span></a>
+      <p style="color: var(--text-muted); font-size: 0.9rem;">&copy; 2026 NorthPeak Digital. All rights reserved.</p>
+      
+      <div class="credit-line">
+        Built for <a href="https://digitalheroesco.com" target="_blank" rel="noopener">Digital Heroes Training Task</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- SCRIPT -->
+  <script>
+    const projectShowcases = {
+      webapps: {
+        client: "FinScale Global",
+        title: "Real-Time FinTech Web Application",
+        url: "https://app.finscale.io/dashboard/trading",
+        stats: [
+          { val: "70%", lbl: "Load Speed Increase" },
+          { val: "< 15ms", lbl: "Latency Achieved" },
+          { val: "+42%", lbl: "User Retention" }
+        ],
+        mockUI: `
+          <div style="background: #ffffff; border-radius: 0.5rem; padding: 1.25rem; border: 1px solid #e2e8f0;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem; border-bottom:1px solid #e2e8f0; padding-bottom:0.75rem;">
+              <span style="font-weight:700; color:#4f46e5;">BTC / USD - Live Trading Console</span>
+              <span style="color:#047857; font-weight:700;">$98,420.50 (+4.8%)</span>
+            </div>
+            <div class="mock-grid">
+              <div class="mock-card"><span style="font-size:0.75rem; color:#64748b;">24h Volume</span><br><strong style="font-size:1.1rem; color:#0f172a;">$1.24B</strong><div class="mock-chart-bar" style="width:85%;"></div></div>
+              <div class="mock-card"><span style="font-size:0.75rem; color:#64748b;">Order Execution</span><br><strong style="font-size:1.1rem; color:#0f172a;">12.4ms</strong><div class="mock-chart-bar" style="width:98%; background:#047857;"></div></div>
+              <div class="mock-card"><span style="font-size:0.75rem; color:#64748b;">Active Session</span><br><strong style="font-size:1.1rem; color:#0f172a;">Enterprise WS</strong><div class="mock-chart-bar" style="width:100%; background:#4f46e5;"></div></div>
+            </div>
+          </div>
+        `,
+        description: "We re-engineered FinScale's core trading portal using Next.js and WebSocket architecture. The new interface supports custom chart rendering, dynamic order books, and high-concurrency data streaming.",
+        tech: ["React.js", "Next.js", "TypeScript", "WebSockets", "Chart.js"]
+      },
+      growth: {
+        client: "CloudAura Inc.",
+        title: "Omnichannel Customer Acquisition Platform",
+        url: "https://analytics.cloudaura.com/campaigns",
+        stats: [
+          { val: "4.2x", lbl: "Return On Ad Spend (ROAS)" },
+          { val: "-35%", lbl: "Cost Per Acquisition" },
+          { val: "12.4k", lbl: "New Monthly Signups" }
+        ],
+        mockUI: `
+          <div style="background: #ffffff; border-radius: 0.5rem; padding: 1.25rem; border: 1px solid #e2e8f0;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem; border-bottom:1px solid #e2e8f0; padding-bottom:0.75rem;">
+              <span style="font-weight:700; color:#4f46e5;">Campaign Overview: Q3 Growth Sprint</span>
+              <span style="background:#ecfdf5; color:#047857; padding:0.2rem 0.6rem; border-radius:0.3rem; font-size:0.75rem; font-weight:700;">Active Pipeline</span>
+            </div>
+            <div class="mock-grid">
+              <div class="mock-card"><span style="font-size:0.75rem; color:#64748b;">Ad Attribution</span><br><strong style="font-size:1.1rem; color:#0f172a;">Google & LinkedIn</strong><div class="mock-chart-bar" style="width:90%;"></div></div>
+              <div class="mock-card"><span style="font-size:0.75rem; color:#64748b;">Conversion Rate</span><br><strong style="font-size:1.1rem; color:#0f172a;">6.82%</strong><div class="mock-chart-bar" style="width:75%; background:#047857;"></div></div>
+              <div class="mock-card"><span style="font-size:0.75rem; color:#64748b;">Pipeline Revenue</span><br><strong style="font-size:1.1rem; color:#0f172a;">$482,000</strong><div class="mock-chart-bar" style="width:95%; background:#0284c7;"></div></div>
+            </div>
+          </div>
+        `,
+        description: "Created high-converting interactive landing pages with personalized dynamic copy. Integrated multi-touch attribution modeling and automated workflow triggers.",
+        tech: ["Growth Ads", "Google Analytics 4", "Segment", "HubSpot Automation"]
+      },
+      seo: {
+        client: "Apex Enterprise",
+        title: "Programmatic SEO & Content Architecture",
+        url: "https://portal.apex.com/seo-performance",
+        stats: [
+          { val: "180k", lbl: "Monthly Organic Visitors" },
+          { val: "+1100%", lbl: "Search Impression Growth" },
+          { val: "DA 68", lbl: "Domain Authority" }
+        ],
+        mockUI: `
+          <div style="background: #ffffff; border-radius: 0.5rem; padding: 1.25rem; border: 1px solid #e2e8f0;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem; border-bottom:1px solid #e2e8f0; padding-bottom:0.75rem;">
+              <span style="font-weight:700; color:#0284c7;">Search Console Engine</span>
+              <span style="color:#64748b; font-size:0.8rem;">12,400 Pages Indexed</span>
+            </div>
+            <div class="mock-grid">
+              <div class="mock-card"><span style="font-size:0.75rem; color:#64748b;">Avg Position</span><br><strong style="font-size:1.1rem; color:#0f172a;">#2.4</strong><div class="mock-chart-bar" style="width:92%;"></div></div>
+              <div class="mock-card"><span style="font-size:0.75rem; color:#64748b;">Organic Clicks</span><br><strong style="font-size:1.1rem; color:#0f172a;">184,200/mo</strong><div class="mock-chart-bar" style="width:88%; background:#047857;"></div></div>
+              <div class="mock-card"><span style="font-size:0.75rem; color:#64748b;">Schema Coverage</span><br><strong style="font-size:1.1rem; color:#0f172a;">100% Valid</strong><div class="mock-chart-bar" style="width:100%; background:#4f46e5;"></div></div>
+            </div>
+          </div>
+        `,
+        description: "Built a custom headless SSR content engine generating dynamically structured schema markup (JSON-LD) and instant edge-cached pages for apex search rankings.",
+        tech: ["Node.js", "Programmatic SEO", "GraphQL", "Vercel Edge"]
+      },
+      uiux: {
+        client: "VogueFit Direct",
+        title: "Modern E-Commerce Mobile Checkout Design",
+        url: "https://checkout.voguefit.com/express",
+        stats: [
+          { val: "+31.4%", lbl: "Checkout Conversion Rate" },
+          { val: "1.2s", lbl: "Average Page Load" },
+          { val: "4.9/5", lbl: "User Satisfaction Score" }
+        ],
+        mockUI: `
+          <div style="background: #ffffff; border-radius: 0.5rem; padding: 1.25rem; border: 1px solid #e2e8f0;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem; border-bottom:1px solid #e2e8f0; padding-bottom:0.75rem;">
+              <span style="font-weight:700; color:#db2777;">Express Mobile Checkout Tray</span>
+              <span style="background:#fce7f3; color:#db2777; padding:0.2rem 0.6rem; border-radius:0.3rem; font-size:0.75rem; font-weight:700;">1-Click Active</span>
+            </div>
+            <div class="mock-grid">
+              <div class="mock-card"><span style="font-size:0.75rem; color:#64748b;">Payment Gateway</span><br><strong style="font-size:1.1rem; color:#0f172a;">Apple & Google Pay</strong><div class="mock-chart-bar" style="width:96%; background:#db2777;"></div></div>
+              <div class="mock-card"><span style="font-size:0.75rem; color:#64748b;">Cart Abandonment</span><br><strong style="font-size:1.1rem; color:#0f172a;">Dropped by 41%</strong><div class="mock-chart-bar" style="width:82%; background:#047857;"></div></div>
+              <div class="mock-card"><span style="font-size:0.75rem; color:#64748b;">Layout Shifts</span><br><strong style="font-size:1.1rem; color:#0f172a;">0.00 CLS</strong><div class="mock-chart-bar" style="width:100%; background:#0284c7;"></div></div>
+            </div>
+          </div>
+        `,
+        description: "Conducted exhaustive user journey mapping to reduce friction in the purchasing pipeline. Reduced a 4-step form into a seamless 1-click Express Checkout experience.",
+        tech: ["Figma UI/UX", "Tailwind CSS", "Stripe SDK", "A/B Testing"]
+      },
+      api: {
+        client: "LogiTech Global",
+        title: "Enterprise ERP & CRM Sync Middleware",
+        url: "https://api.logitech.com/v2/graphql",
+        stats: [
+          { val: "120+ hrs", lbl: "Saved Per Month" },
+          { val: "99.99%", lbl: "System Uptime" },
+          { val: "0 Error", lbl: "Manual Sync Bugs" }
+        ],
+        mockUI: `
+          <div style="background: #ffffff; border-radius: 0.5rem; padding: 1.25rem; border: 1px solid #e2e8f0; font-family: monospace;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem; border-bottom:1px solid #e2e8f0; padding-bottom:0.75rem;">
+              <span style="color:#047857; font-weight:700;">POST /v2/sync-inventory [200 OK]</span>
+              <span style="color:#64748b; font-size:0.75rem;">Latency: 8.4ms</span>
+            </div>
+            <div style="background:#f8fafc; border: 1px solid #cbd5e1; padding:0.85rem; border-radius:0.4rem; font-size:0.8rem; color:#0284c7; line-height:1.5;">
+              {<br>
+              &nbsp;&nbsp;"status": "SUCCESS",<br>
+              &nbsp;&nbsp;"records_synced": 48291,<br>
+              &nbsp;&nbsp;"destination": ["Salesforce_CRM", "SAP_Enterprise"]<br>
+              }
+            </div>
+          </div>
+        `,
+        description: "Developed microservices middleware using Docker and AWS Lambda to orchestrate asynchronous background syncs between disparate enterprise systems.",
+        tech: ["Docker", "Node.js", "GraphQL", "Redis", "AWS Lambda"]
+      },
+      audit: {
+        client: "Nexus Health",
+        title: "Enterprise Web Speed & Accessibility Audit",
+        url: "https://nexushealth.org/lighthouse-report",
+        stats: [
+          { val: "100/100", lbl: "Lighthouse Performance" },
+          { val: "0.00", lbl: "CLS Score" },
+          { val: "WCAG 2.1", lbl: "Accessibility Compliant" }
+        ],
+        mockUI: `
+          <div style="background: #ffffff; border-radius: 0.5rem; padding: 1.25rem; border: 1px solid #e2e8f0;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem; border-bottom:1px solid #e2e8f0; padding-bottom:0.75rem;">
+              <span style="font-weight:700; color:#047857;">Lighthouse Score Engine</span>
+              <span style="background:#ecfdf5; color:#047857; padding:0.2rem 0.6rem; border-radius:0.3rem; font-size:0.75rem; font-weight:800;">100 / 100 PASSED</span>
+            </div>
+            <div class="mock-grid">
+              <div class="mock-card"><span style="font-size:0.75rem; color:#64748b;">Performance</span><br><strong style="font-size:1.1rem; color:#047857;">100%</strong><div class="mock-chart-bar" style="width:100%; background:#047857;"></div></div>
+              <div class="mock-card"><span style="font-size:0.75rem; color:#64748b;">Accessibility</span><br><strong style="font-size:1.1rem; color:#047857;">100%</strong><div class="mock-chart-bar" style="width:100%; background:#047857;"></div></div>
+              <div class="mock-card"><span style="font-size:0.75rem; color:#64748b;">Best Practices</span><br><strong style="font-size:1.1rem; color:#047857;">100%</strong><div class="mock-chart-bar" style="width:100%; background:#047857;"></div></div>
+            </div>
+          </div>
+        `,
+        description: "Refactored client JavaScript bundles, implemented AVIF image formatting, and fixed contrast ratios to make the platform accessible to all users.",
+        tech: ["Lighthouse", "Web Vitals API", "Native JS", "CSS Grid"]
+      }
+    };
+
+    // --- DRAWER & FOCUS TRAPPING ---
+    const hamburgerBtn = document.getElementById('hamburgerToggle');
+    const drawer = document.getElementById('categoryDrawer');
+    const drawerOverlay = document.getElementById('drawerOverlay');
+
+    function toggleDrawer() {
+      const active = drawer.classList.toggle('active');
+      drawerOverlay.classList.toggle('active');
+      hamburgerBtn.classList.toggle('active');
+      hamburgerBtn.setAttribute('aria-expanded', active);
+    }
+
+    function closeDrawer() {
+      drawer.classList.remove('active');
+      drawerOverlay.classList.remove('active');
+      hamburgerBtn.classList.remove('active');
+      hamburgerBtn.setAttribute('aria-expanded', 'false');
+    }
+
+    hamburgerBtn.addEventListener('click', toggleDrawer);
+    drawerOverlay.addEventListener('click', closeDrawer);
+
+    // --- CUSTOMIZER & ESTIMATE CALCULATOR ---
+    let selectedTierName = 'Small Business';
+    let selectedBasePrice = 4900;
+    let selectedTheme = 'Midnight Dark';
+    let selectedVibe = 'Speed & Conversion First';
+
+    function openRegisterModal(tier = 'small') {
+      const regModal = document.getElementById('registerModal');
+      selectBusinessSize(tier, tier === 'small' ? 4900 : (tier === 'mid' ? 9500 : 14000));
+      regModal.classList.add('active');
+    }
+
+    function closeRegisterModal() {
+      document.getElementById('registerModal').classList.remove('active');
+    }
+
+    function selectBusinessSize(tier, basePrice) {
+      selectedBasePrice = basePrice;
+      selectedTierName = tier === 'small' ? 'Small Business' : (tier === 'mid' ? 'Mid-Market' : 'Big Business');
+      document.querySelectorAll('.size-card').forEach(c => c.classList.remove('selected'));
+      const activeCard = document.getElementById(`tier-${tier}`);
+      if (activeCard) activeCard.classList.add('selected');
+      updateSummaryBar();
+    }
+
+    function selectTheme(themeName) {
+      selectedTheme = themeName;
+      document.querySelectorAll('.theme-card').forEach(tc => tc.classList.remove('selected'));
+      const themeMap = {
+        'Midnight Dark': 'theme-midnight',
+        'Crisp Light': 'theme-minimal',
+        'Cyber Neon': 'theme-cyber',
+        'Royal Gold': 'theme-emerald'
+      };
+      const el = document.getElementById(themeMap[themeName]);
+      if (el) el.classList.add('selected');
+      updateSummaryBar();
+    }
+
+    function selectVibe(vibeName) {
+      selectedVibe = vibeName;
+      document.querySelectorAll('.vibe-card').forEach(vc => vc.classList.remove('selected'));
+      const vibeMap = {
+        'Speed & Conversion First': 'vibe-speed',
+        'Glassmorphism & Smooth Motion': 'vibe-glass',
+        '3D & Modern Interactive': 'vibe-3d'
+      };
+      const el = document.getElementById(vibeMap[vibeName]);
+      if (el) el.classList.add('selected');
+      updateSummaryBar();
+    }
+
+    function calculateCustomPay() {
+      let addonTotal = 0;
+      document.querySelectorAll('.cat-check:checked').forEach(chk => {
+        addonTotal += parseInt(chk.value);
+      });
+      const grandTotal = selectedBasePrice + addonTotal;
+      document.getElementById('dynamicTotal').innerText = `$${grandTotal.toLocaleString()}`;
+    }
+
+    function updateSummaryBar() {
+      const summaryElem = document.getElementById('summaryText');
+      if (summaryElem) {
+        summaryElem.innerText = `${selectedTierName} • Theme: ${selectedTheme} • Vibe: ${selectedVibe}`;
+      }
+      calculateCustomPay();
+    }
+
+    // --- SHOWCASE MODAL ---
+    function openShowcase(key) {
+      const proj = projectShowcases[key];
+      const modal = document.getElementById('proofModal');
+      const modalBody = document.getElementById('modalBody');
+      if (!proj || !modal || !modalBody) return;
+
+      modalBody.innerHTML = `
+        <div style="margin-bottom: 0.75rem;">
+          <span class="proof-label">${proj.client}</span>
+        </div>
+
+        <div class="browser-frame">
+          <div class="browser-bar">
+            <span class="browser-dot" style="background:#ef4444;"></span>
+            <span class="browser-dot" style="background:#f59e0b;"></span>
+            <span class="browser-dot" style="background:#10b981;"></span>
+            <span class="browser-url">${proj.url}</span>
+          </div>
+          <div style="padding: 1.5rem; background: #f8fafc;">
+            ${proj.mockUI}
+          </div>
+        </div>
+
+        <div class="showcase-stats">
+          ${proj.stats.map(s => `
+            <div class="stat-box">
+              <div class="val">${s.val}</div>
+              <div class="lbl">${s.lbl}</div>
+            </div>
+          `).join('')}
+        </div>
+
+        <h4 style="font-weight: 700; margin-bottom: 0.5rem; font-size: 1.1rem; color: #0f172a;">Project Execution Breakdown</h4>
+        <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.65; margin-bottom: 1.5rem;">${proj.description}</p>
+
+        <div style="border-top: 1px solid var(--border-color); padding-top: 1rem;">
+          <span style="font-size: 0.85rem; color: var(--text-muted); font-weight: 600;">Technologies Applied:</span><br>
+          ${proj.tech.map(t => `<span class="tech-tag">${t}</span>`).join('')}
+        </div>
+      `;
+
+      modal.classList.add('active');
+    }
+
+    function closeShowcase() {
+      const modal = document.getElementById('proofModal');
+      if (modal) modal.classList.remove('active');
+    }
+
+    // --- AI CHATBOT LOGIC ---
+    const chatbotToggle = document.getElementById('chatbotToggle');
+    const chatbotContainer = document.getElementById('chatbotContainer');
+    const chatbotClose = document.getElementById('chatbotClose');
+    const chatForm = document.getElementById('chatForm');
+    const chatInput = document.getElementById('chatInput');
+    const chatMessages = document.getElementById('chatMessages');
+
+    function toggleChatbot() {
+      const active = chatbotContainer.classList.toggle('active');
+      chatbotToggle.setAttribute('aria-expanded', active);
+    }
+    
+    function closeChatbot() {
+      chatbotContainer.classList.remove('active');
+      chatbotToggle.setAttribute('aria-expanded', 'false');
+    }
+
+    chatbotToggle.addEventListener('click', toggleChatbot);
+    chatbotClose.addEventListener('click', closeChatbot);
+
+    function getBotResponse(userText) {
+      const text = userText.toLowerCase();
+
+      // Educational firm / Coaching / School intent
+      if (text.includes('education') || text.includes('edu') || text.includes('coaching') || text.includes('institute') || text.includes('school') || text.includes('course') || text.includes('student') || text.includes('firm') || text.includes('ccc') || text.includes('typing')) {
+        return "That's fantastic! 🎓 We engineer specialized websites and student portals for **Educational Firms, Coaching Centers, and Institutes**. Key capabilities include online enrollment forms, course management, student dashboards, and fast responsive layouts. You can click **'Customize Product Theme & Register'** at the top to configure your custom estimate!";
+      }
+
+      // General Website Creation Intent
+      if (text.includes('website') || text.includes('web site') || text.includes('build') || text.includes('make') || text.includes('develop') || text.includes('create') || text.includes('bnana') || text.includes('bnani') || text.includes('banana')) {
+        return "Absolutely! 🚀 We construct custom, accessible, and high-converting websites delivered in 2 weeks. Whether for an **Educational Firm**, **E-Commerce Portal**, or **SaaS Platform**, our base packages start at **$4,900**. Launch the Registration Customizer at the top to view custom options!";
+      }
+
+      // Pricing Intent
+      if (text.includes('price') || text.includes('cost') || text.includes('tier') || text.includes('pay') || text.includes('rate') || text.includes('how much') || text.includes('kitna') || text.includes('kitne')) {
+        return "Our transparent pricing tiers are: 🟢 **Small Business ($4,900)**, 🔵 **Mid-Market ($9,500)**, and 🟣 **Enterprise ($14,000/mo)**. Use our Interactive Customizer to select specific service modules!";
+      }
+
+      // Theme Intent
+      if (text.includes('theme') || text.includes('color') || text.includes('custom') || text.includes('design') || text.includes('look')) {
+        return "We offer 4 distinct visual theme palettes: **Midnight Dark**, **Crisp Light**, **Cyber Neon**, and **Royal Gold**. You can select your brand aesthetic inside the Registration Modal!";
+      }
+
+      // Contact / Hire Intent
+      if (text.includes('contact') || text.includes('email') || text.includes('hire') || text.includes('reach') || text.includes('call')) {
+        return "You can submit your project overview in the **'Let's Build Something Great'** form at the bottom, or register your custom product tier above for direct assistance!";
+      }
+
+      // Greetings
+      if (text.includes('hi') || text.includes('hello') || text.includes('hey') || text.includes('namaste')) {
+        return "Hello! 👋 Welcome to NorthPeak Digital. How can PeakAI assist you with your digital engineering or web development requirements today?";
+      }
+
+      // Default Fallback
+      return "Thank you for reaching out! PeakAI is here to help. We build custom platforms for **Educational Firms, Startups, and Enterprise Brands**. Feel free to ask about our pricing tiers, core services, or custom design themes!";
+    }
+
+    if (chatForm) {
+      chatForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const userMsg = chatInput.value.trim();
+        if (!userMsg) return;
+
+        const userDiv = document.createElement('div');
+        userDiv.className = 'chat-msg user-msg';
+        userDiv.innerText = userMsg;
+        chatMessages.appendChild(userDiv);
+
+        chatInput.value = '';
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+
+        const typingDiv = document.createElement('div');
+        typingDiv.className = 'typing-indicator';
+        typingDiv.innerText = 'PeakAI is typing...';
+        chatMessages.appendChild(typingDiv);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+
+        setTimeout(() => {
+          typingDiv.remove();
+          const botReply = getBotResponse(userMsg);
+          const botDiv = document.createElement('div');
+          botDiv.className = 'chat-msg bot-msg';
+          botDiv.innerHTML = botReply;
+          chatMessages.appendChild(botDiv);
+          chatMessages.scrollTop = chatMessages.scrollHeight;
+        }, 650);
+      });
+    }
+
+    // --- EVENT LISTENERS ---
+    document.addEventListener('DOMContentLoaded', () => {
+      
+      const observerOptions = { threshold: 0.1 };
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) entry.target.classList.add('active');
+        });
+      }, observerOptions);
+
+      document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+      const counterObserver = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const el = entry.target;
+            const target = parseFloat(el.getAttribute('data-target'));
+            const prefix = el.getAttribute('data-prefix') || '';
+            const suffix = el.getAttribute('data-suffix') || '';
+            const decimals = parseInt(el.getAttribute('data-decimals') || 0);
+
+            let count = 0;
+            const speed = 30;
+            const inc = target / speed;
+
+            const updateCount = () => {
+              count += inc;
+              if (count < target) {
+                el.innerText = prefix + count.toFixed(decimals) + suffix;
+                setTimeout(updateCount, 30);
+              } else {
+                el.innerText = prefix + target.toFixed(decimals) + suffix;
+              }
+            };
+
+            updateCount();
+            obs.unobserve(el);
+          }
+        });
+      }, { threshold: 0.5 });
+
+      document.querySelectorAll('.counter').forEach(el => counterObserver.observe(el));
+
+      document.addEventListener('click', (e) => {
+        const proofBtn = e.target.closest('.btn-proof');
+        if (proofBtn) {
+          e.preventDefault();
+          const serviceKey = proofBtn.getAttribute('data-service');
+          openShowcase(serviceKey);
+        }
+
+        if (e.target.closest('#modalClose') || e.target.id === 'proofModal') {
+          closeShowcase();
+        }
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          closeShowcase();
+          closeRegisterModal();
+          closeDrawer();
+          closeChatbot();
+        }
+      });
+
+      const form = document.getElementById('contactForm');
+      if (form) {
+        form.addEventListener('submit', (e) => {
+          e.preventDefault();
+          const name = document.getElementById('name').value.trim();
+          const email = document.getElementById('email').value.trim();
+          const message = document.getElementById('message').value.trim();
+          const statusDiv = document.getElementById('formStatus');
+
+          let valid = true;
+          if (!name) { document.getElementById('group-name').classList.add('error'); valid = false; }
+          else { document.getElementById('group-name').classList.remove('error'); }
+
+          if (!email || !email.includes('@')) { document.getElementById('group-email').classList.add('error'); valid = false; }
+          else { document.getElementById('group-email').classList.remove('error'); }
+
+          if (message.length < 10) { document.getElementById('group-message').classList.add('error'); valid = false; }
+          else { document.getElementById('group-message').classList.remove('error'); }
+
+          if (valid) {
+            statusDiv.className = 'form-status success';
+            statusDiv.textContent = 'Thank you! Your proposal request has been received.';
+            form.reset();
+            setTimeout(() => { statusDiv.className = 'form-status'; statusDiv.textContent = ''; }, 5000);
+          }
+        });
+      }
+
+      const regForm = document.getElementById('clientRegisterForm');
+      if (regForm) {
+        regForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+          const regName = document.getElementById('regName').value.trim();
+          const regEmail = document.getElementById('regEmail').value.trim();
+          const regStatus = document.getElementById('regStatus');
+
+          let valid = true;
+          if (!regName) { document.getElementById('reg-group-name').classList.add('error'); valid = false; }
+          else { document.getElementById('reg-group-name').classList.remove('error'); }
+
+          if (!regEmail || !regEmail.includes('@')) { document.getElementById('reg-group-email').classList.add('error'); valid = false; }
+          else { document.getElementById('reg-group-email').classList.remove('error'); }
+
+          if (valid) {
+            regStatus.className = 'form-status success';
+            regStatus.textContent = `Registration confirmed for ${regName}! Your ${selectedTheme} theme configuration and pricing estimate are reserved.`;
+            regForm.reset();
+            setTimeout(() => { closeRegisterModal(); regStatus.className = 'form-status'; regStatus.textContent = ''; }, 4000);
+          }
+        });
+      }
+    });
+  </script>
 </body>
 </html>

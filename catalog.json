@@ -1,0 +1,114 @@
+[
+  {
+    "id": "prod_1",
+    "name": "Navy Blue Slim Fit Cotton Shirt",
+    "price_inr": 899,
+    "stock": 15,
+    "description": "Premium 100% breathable cotton slim fit casual shirt in navy blue. Ideal for daily office or evening wear.",
+    "tags": ["clothing", "shirt", "blue", "menswear", "cotton", "casual"]
+  },
+  {
+    "id": "prod_2",
+    "name": "Sky Blue Linen Casual Shirt",
+    "price_inr": 1299,
+    "stock": 8,
+    "description": "Lightweight sky blue linen shirt with a modern mandarin collar. Perfect for summer outings.",
+    "tags": ["clothing", "shirt", "blue", "linen", "summer", "menswear"]
+  },
+  {
+    "id": "prod_3",
+    "name": "Classic White Formal Cotton Shirt",
+    "price_inr": 799,
+    "stock": 20,
+    "description": "Crisp white formal shirt made from high-density cotton. Wrinkle-resistant finish.",
+    "tags": ["clothing", "shirt", "white", "formal", "office", "menswear"]
+  },
+  {
+    "id": "prod_4",
+    "name": "Wireless Active Noise Cancelling Earbuds",
+    "price_inr": 2499,
+    "stock": 10,
+    "description": "True wireless earbuds with 30dB active noise cancellation, touch controls, and 28-hour battery life.",
+    "tags": ["electronics", "audio", "earbuds", "wireless", "bluetooth"]
+  },
+  {
+    "id": "prod_5",
+    "name": "Smart AMOLED Fitness Watch v2",
+    "price_inr": 3499,
+    "stock": 5,
+    "description": "Smartwatch with 1.4-inch AMOLED display, SpO2 & continuous heart rate monitoring, and 100+ sports modes.",
+    "tags": ["electronics", "wearable", "smartwatch", "fitness"]
+  },
+  {
+    "id": "prod_6",
+    "name": "Black Oversized Streetwear Graphic T-Shirt",
+    "price_inr": 599,
+    "stock": 25,
+    "description": "Heavyweight 240 GSM combed cotton t-shirt with a vintage graphic print.",
+    "tags": ["clothing", "tshirt", "black", "streetwear", "oversized"]
+  },
+  {
+    "id": "prod_7",
+    "name": "Classic Denim Blue Jacket",
+    "price_inr": 1899,
+    "stock": 12,
+    "description": "Rugged denim jacket in medium blue wash with twin chest pockets and buttoned cuffs.",
+    "tags": ["clothing", "jacket", "blue", "denim", "outerwear"]
+  },
+  {
+    "id": "prod_8",
+    "name": "Insulated Stainless Steel Water Bottle (1L)",
+    "price_inr": 450,
+    "stock": 30,
+    "description": "Double-wall vacuum insulated flask keeping drinks cold for 24h or hot for 12h.",
+    "tags": ["home", "fitness", "accessories", "bottle"]
+  },
+  {
+    "id": "prod_9",
+    "name": "Ergonomic Mechanical Gaming Keyboard",
+    "price_inr": 4200,
+    "stock": 7,
+    "description": "RGB hot-swappable mechanical keyboard with tactile brown switches and wrist rest.",
+    "tags": ["electronics", "computer", "accessories", "keyboard"]
+  },
+  {
+    "id": "prod_10",
+    "name": "Royal Blue Casual Polo T-Shirt",
+    "price_inr": 699,
+    "stock": 18,
+    "description": "Classic pique cotton polo t-shirt in vibrant royal blue. Soft fabric with rib collar.",
+    "tags": ["clothing", "shirt", "polo", "blue", "tshirt"]
+  },
+  {
+    "id": "prod_11",
+    "name": "Genuine Leather Minimalist Bifold Wallet",
+    "price_inr": 899,
+    "stock": 14,
+    "description": "Slim top-grain leather wallet with RFID blocking protection and card slots.",
+    "tags": ["accessories", "leather", "wallet", "menswear"]
+  },
+  {
+    "id": "prod_12",
+    "name": "Cushioned Running Sports Shoes - Charcoal Black",
+    "price_inr": 2199,
+    "stock": 9,
+    "description": "Lightweight breathable mesh running shoes with responsive foam cushioning for extra comfort.",
+    "tags": ["footwear", "shoes", "sports", "running", "fitness"]
+  },
+  {
+    "id": "prod_13",
+    "name": "Handcrafted Ceramic Coffee Mug Set (2 Pcs)",
+    "price_inr": 399,
+    "stock": 22,
+    "description": "350ml microwave and dishwasher safe ceramic mugs in dual-tone matte finish.",
+    "tags": ["home", "kitchen", "ceramics", "mug"]
+  },
+  {
+    "id": "prod_14",
+    "name": "Water-Resistant Gym Duffle Bag with Shoe Compartment",
+    "price_inr": 999,
+    "stock": 11,
+    "description": "Multi-compartment travel and gym bag made of durable 600D polyester with isolated shoe pocket.",
+    "tags": ["bags", "fitness", "accessories", "travel"]
+  }
+]

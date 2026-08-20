@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Razorpay Agentic Commerce - AI Shopping Assistant</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Razorpay Standard Checkout SDK -->
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+  <style>
+    :root {
+      --bg-color: #0b0f19;
+      --card-bg: #151d30;
+      --chat-bg: #1a233a;
+      --user-msg-bg: #2563eb;
+      --agent-msg-bg: #1e293b;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent-blue: #38bdf8;
+      --accent-green: #22c55e;
+      --accent-amber: #f59e0b;
+      --accent-red: #ef4444;
+      --border-color: #2e3d5c;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Top Navigation Header */
+    header {
+      background: #111827;
+      border-bottom: 2px solid var(--border-color);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .brand-logo {
+      background: linear-gradient(135deg, #0284c7, #2563eb);
+      color: #fff;
+      font-weight: 800;
+      padding: 0.5rem 0.8rem;
+      border-radius: 8px;
+      font-size: 1.1rem;
+      letter-spacing: 0.05em;
+    }
+
+    .brand-title h1 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .brand-title p {
+      font-size: 0.8rem;
+      color: var(--accent-blue);
+      font-weight: 500;
+    }
+
+    .header-actions {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    .btn-audit {
+      background: rgba(56, 189, 248, 0.12);
+      color: var(--accent-blue);
+      border: 1px solid var(--accent-blue);
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.85rem;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.2s;
+    }
+
+    .btn-audit:hover {
+      background: var(--accent-blue);
+      color: #0f172a;
+    }
+
+    /* Main Container */
+    main {
+      flex: 1;
+      max-width: 1000px;
+      width: 100%;
+      margin: 1.5rem auto;
+      display: flex;
+      flex-direction: column;
+      padding: 0 1rem;
+    }
+
+    .chat-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      display: flex;
+      flex-direction: column;
+      height: 75vh;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+      overflow: hidden;
+    }
+
+    .chat-header {
+      background: #111827;
+      padding: 0.9rem 1.25rem;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .session-badge {
+      font-family: monospace;
+      font-size: 0.8rem;
+      background: rgba(255,255,255,0.05);
+      padding: 0.25rem 0.6rem;
+      border-radius: 6px;
+      color: var(--text-muted);
+      border: 1px solid var(--border-color);
+    }
+
+    /* Chat Messages Box */
+    .chat-logs {
+      flex: 1;
+      padding: 1.25rem;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      background: var(--chat-bg);
+    }
+
+    .message-row {
+      display: flex;
+      gap: 0.75rem;
+      max-width: 85%;
+    }
+
+    .message-row.user {
+      align-self: flex-end;
+      flex-direction: row-reverse;
+    }
+
+    .message-row.agent {
+      align-self: flex-start;
+    }
+
+    .avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.9rem;
+      flex-shrink: 0;
+    }
+
+    .avatar.agent {
+      background: linear-gradient(135deg, #0284c7, #3b82f6);
+      color: #fff;
+    }
+
+    .avatar.user {
+      background: #334155;
+      color: #fff;
+    }
+
+    .bubble {
+      padding: 0.85rem 1.1rem;
+      border-radius: 14px;
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    .message-row.user .bubble {
+      background: var(--user-msg-bg);
+      color: #fff;
+      border-bottom-right-radius: 4px;
+    }
+
+    .message-row.agent .bubble {
+      background: var(--agent-msg-bg);
+      color: var(--text-main);
+      border: 1px solid var(--border-color);
+      border-bottom-left-radius: 4px;
+    }
+
+    /* EXPLICIT HUMAN GATE CARD */
+    .human-gate-card {
+      margin-top: 0.75rem;
+      background: #0f172a;
+      border: 2px solid var(--accent-blue);
+      border-radius: 12px;
+      padding: 1rem;
+      box-shadow: 0 6px 20px rgba(56, 189, 248, 0.15);
+    }
+
+    .gate-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      background: rgba(245, 158, 11, 0.15);
+      color: var(--accent-amber);
+      border: 1px solid rgba(245, 158, 11, 0.4);
+      padding: 0.25rem 0.6rem;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      letter-spacing: 0.05em;
+    }
+
+    .gate-price-tag {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--accent-green);
+      margin: 0.25rem 0 0.75rem 0;
+    }
+
+    .btn-confirm-pay {
+      width: 100%;
+      background: linear-gradient(135deg, #10b981, #059669);
+      color: #fff;
+      border: none;
+      padding: 0.85rem 1.25rem;
+      border-radius: 10px;
+      font-size: 1.05rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      transition: all 0.2s;
+      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+    }
+
+    .btn-confirm-pay:hover {
+      background: linear-gradient(135deg, #059669, #047857);
+      transform: translateY(-1px);
+    }
+
+    .btn-confirm-pay:disabled {
+      background: #475569;
+      cursor: not-allowed;
+      box-shadow: none;
+      transform: none;
+    }
+
+    /* System Status Banners */
+    .system-banner {
+      padding: 0.75rem 1rem;
+      border-radius: 10px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+    }
+
+    .system-banner.success {
+      background: rgba(34, 197, 94, 0.15);
+      border: 1px solid rgba(34, 197, 94, 0.4);
+      color: #4ade80;
+    }
+
+    .system-banner.error {
+      background: rgba(239, 68, 68, 0.15);
+      border: 1px solid rgba(239, 68, 68, 0.4);
+      color: #f87171;
+    }
+
+    /* Quick Prompts Bar */
+    .quick-prompts {
+      padding: 0.6rem 1.25rem;
+      background: #111827;
+      border-top: 1px solid var(--border-color);
+      display: flex;
+      gap: 0.5rem;
+      overflow-x: auto;
+    }
+
+    .pill {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--border-color);
+      color: var(--text-muted);
+      padding: 0.4rem 0.75rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s;
+    }
+
+    .pill:hover {
+      background: rgba(56, 189, 248, 0.15);
+      color: var(--accent-blue);
+      border-color: var(--accent-blue);
+    }
+
+    /* Chat Input Form */
+    .chat-input-area {
+      padding: 1rem 1.25rem;
+      background: #111827;
+      border-top: 1px solid var(--border-color);
+      display: flex;
+      gap: 0.75rem;
+    }
+
+    .chat-input {
+      flex: 1;
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 0.85rem 1.1rem;
+      border-radius: 10px;
+      font-size: 0.95rem;
+      outline: none;
+    }
+
+    .chat-input:focus {
+      border-color: var(--accent-blue);
+    }
+
+    .btn-send {
+      background: var(--user-msg-bg);
+      color: #fff;
+      border: none;
+      padding: 0.85rem 1.5rem;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .btn-send:hover {
+      background: #1d4ed8;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Header Navigation -->
+  <header>
+    <div class="brand">
+      <div class="brand-logo">RZP AI</div>
+      <div class="brand-title">
+        <h1>Agentic Commerce AI Assistant</h1>
+        <p>Razorpay AI Buildathon Demo</p>
+      </div>
+    </div>
+    <div class="header-actions">
+      <a href="/audit/view" target="_blank" class="btn-audit">
+        🛡️ View Audit Trail Dashboard
+      </a>
+    </div>
+  </header>
+
+  <!-- Main Chat Dashboard -->
+  <main>
+    <div class="chat-card">
+      <div class="chat-header">
+        <span style="font-weight:600; color: #fff; display:flex; align-items:center; gap:0.5rem;">
+          <span style="color: var(--accent-green);">●</span> Live Shopping Agent
+        </span>
+        <span class="session-badge" id="sessionTag">Session: initializing...</span>
+      </div>
+
+      <!-- Scrollable Message Log -->
+      <div class="chat-logs" id="chatLogs">
+        <!-- Initial Agent Welcome -->
+        <div class="message-row agent">
+          <div class="avatar agent">AI</div>
+          <div class="bubble">
+            Namaste! 🙏 Main aapka AI Shopping Assistant hoon. Main aapke requirements ke hisab se product find kar sakta hoon. 
+            <br><br><i>Try asking: <b>"mujhe ek blue shirt chahiye under 1000"</b> ya <b>"wireless earbuds show karo"</b>.</i>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Suggestion Pills -->
+      <div class="quick-prompts">
+        <button class="pill" onclick="sendQuickPrompt('mujhe ek blue shirt chahiye under 1000')">👔 Blue shirt under 1000</button>
+        <button class="pill" onclick="sendQuickPrompt('white formal shirt show karo')">👔 White formal shirt</button>
+        <button class="pill" onclick="sendQuickPrompt('best wireless earbuds with noise cancelling')">🎧 Noise cancelling earbuds</button>
+        <button class="pill" onclick="sendQuickPrompt('smart fitness watch under 4000')">⌚ Smart fitness watch</button>
+      </div>
+
+      <!-- Chat Input Area -->
+      <form class="chat-input-area" id="chatForm" onsubmit="handleFormSubmit(event)">
+        <input type="text" id="userMessage" class="chat-input" placeholder="Type your message in Hinglish / English..." autocomplete="off">
+        <button type="submit" class="btn-send" id="sendBtn">Send ➔</button>
+      </form>
+    </div>
+  </main>
+
+  <script>
+    // Initialize Session ID
+    const conversation_id = 'session_demo_' + Math.random().toString(36).substring(2, 8);
+    document.getElementById('sessionTag').innerText = 'Session: ' + conversation_id;
+
+    // Form Submit Handler
+    function handleFormSubmit(e) {
+      e.preventDefault();
+      const input = document.getElementById('userMessage');
+      const text = input.value.trim();
+      if (!text) return;
+
+      input.value = '';
+      sendMessage(text);
+    }
+
+    function sendQuickPrompt(promptText) {
+      sendMessage(promptText);
+    }
+
+    // Append Chat Bubble to UI
+    function appendBubble(role, htmlContent) {
+      const chatLogs = document.getElementById('chatLogs');
+      const row = document.createElement('div');
+      row.className = `message-row ${role}`;
+      
+      const avatar = document.createElement('div');
+      avatar.className = `avatar ${role}`;
+      avatar.innerText = role === 'user' ? 'YOU' : 'AI';
+
+      const bubble = document.createElement('div');
+      bubble.className = 'bubble';
+      bubble.innerHTML = htmlContent;
+
+      row.appendChild(avatar);
+      row.appendChild(bubble);
+      chatLogs.appendChild(row);
+
+      chatLogs.scrollTop = chatLogs.scrollHeight;
+      return bubble;
+    }
+
+    // Main Chat API Call
+    async function sendMessage(userText) {
+      // Append User Bubble
+      appendBubble('user', escapeHtml(userText));
+
+      // Append Typing Indicator Bubble
+      const typingBubble = appendBubble('agent', '<i>AI Assistant is typing...</i>');
+
+      try {
+        const res = await fetch('/chat', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ message: userText, conversation_id })
+        });
+
+        const data = await res.json();
+        
+        let responseHtml = escapeHtml(data.reply_text || 'No response.');
+
+        // If Agent Proposed a Product -> Render EXPLICIT HUMAN CONFIRMATION GATE CARD
+        if (data.proposed_product_id && data.proposed_price) {
+          responseHtml += `
+            <div class="human-gate-card">
+              <div class="gate-badge">🔒 EXPLICIT HUMAN CONFIRMATION GATE</div>
+              <div style="font-size:0.85rem; color:var(--text-muted);">Proposed Product ID: <b>${data.proposed_product_id}</b></div>
+              <div class="gate-price-tag">Price: ₹${data.proposed_price} INR</div>
+              <button class="btn-confirm-pay" onclick="initiateCheckout('${data.proposed_product_id}', ${data.proposed_price}, this)">
+                💳 Confirm & Pay ₹${data.proposed_price}
+              </button>
+            </div>
+          `;
+        }
+
+        typingBubble.innerHTML = responseHtml;
+
+      } catch (err) {
+        typingBubble.innerHTML = `<span style="color: var(--accent-red);">Error connecting to AI Shopping Agent: ${err.message}</span>`;
+      }
+    }
+
+    // EXPLICIT HUMAN GATE -> INITIATE CHECKOUT & LAUNCH RAZORPAY
+    async function initiateCheckout(productId, price, buttonElem) {
+      buttonElem.disabled = true;
+      buttonElem.innerText = '⏳ Creating Razorpay Order...';
+
+      try {
+        // Step 1: Call Gated /checkout/confirm API
+        const res = await fetch('/checkout/confirm', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ conversation_id, product_id: productId })
+        });
+
+        const orderData = await res.json();
+
+        if (!res.ok) {
+          appendSystemBanner('error', `❌ Order Creation Guardrail Blocked: ${orderData.error || 'Validation failed'}`);
+          buttonElem.innerText = '🚫 Action Blocked';
+          return;
+        }
+
+        buttonElem.innerText = '🚀 Launching Razorpay Checkout...';
+
+        // Step 2: Configure Razorpay Standard Checkout JS Options
+        const options = {
+          "key": orderData.razorpay_key_id || "rzp_test_demo123456",
+          "amount": orderData.amount,
+          "currency": orderData.currency || "INR",
+          "name": "Razorpay Agentic Store",
+          "description": orderData.product.name,
+          "order_id": orderData.order_id,
+          "handler": async function (response) {
+            // Payment Success Handler -> Call /payment/verify
+            buttonElem.innerText = '✅ Payment Completed!';
+            
+            const verifyRes = await fetch('/payment/verify', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                conversation_id,
+                order_id: orderData.order_id,
+                payment_id: response.razorpay_payment_id || ('pay_' + Date.now()),
+                status: 'success'
+              })
+            });
+            const verifyData = await verifyRes.json();
+            appendSystemBanner('success', `🎉 Payment Successful! Order ID: <b>${orderData.order_id}</b> | Payment ID: <b>${response.razorpay_payment_id || 'captured'}</b>`);
+          },
+          "modal": {
+            "ondismiss": async function() {
+              // Simulated Dismissal / Payment Cancel Call
+              buttonElem.disabled = false;
+              buttonElem.innerText = `💳 Confirm & Pay ₹${price}`;
+
+              const verifyRes = await fetch('/payment/verify', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                  conversation_id,
+                  order_id: orderData.order_id,
+                  status: 'failed',
+                  failure_reason: 'USER_CANCELLED'
+                })
+              });
+              const verifyData = await verifyRes.json();
+              appendSystemBanner('error', `⚠️ Payment Modal closed or cancelled. ${verifyData.explanation || ''}`);
+            }
+          }
+        };
+
+        // Open Razorpay Standard Checkout Modal
+        const rzp1 = new Razorpay(options);
+        rzp1.open();
+
+      } catch (err) {
+        buttonElem.disabled = false;
+        buttonElem.innerText = `💳 Confirm & Pay ₹${price}`;
+        appendSystemBanner('error', `Error during checkout initiation: ${err.message}`);
+      }
+    }
+
+    function appendSystemBanner(type, messageHtml) {
+      const chatLogs = document.getElementById('chatLogs');
+      const banner = document.createElement('div');
+      banner.className = `system-banner ${type}`;
+      banner.innerHTML = messageHtml;
+      chatLogs.appendChild(banner);
+      chatLogs.scrollTop = chatLogs.scrollHeight;
+    }
+
+    function escapeHtml(str) {
+      return String(str)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;");
+    }
+  </script>
+</body>
+</html>

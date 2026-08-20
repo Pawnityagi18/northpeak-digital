@@ -1,0 +1,22 @@
+services:
+  - type: web
+    name: razorpay-agentic-commerce-demo
+    env: node
+    plan: free
+    buildCommand: npm install
+    startCommand: node server.js
+    envVars:
+      - key: PORT
+        value: 10000
+      - key: AUDIT_LOG_PATH
+        value: /var/data/audit_log.json
+      - key: RAZORPAY_KEY_ID
+        sync: false
+      - key: RAZORPAY_KEY_SECRET
+        sync: false
+      - key: ANTHROPIC_API_KEY
+        sync: false
+    disk:
+      name: audit-disk
+      mountPath: /var/data
+      sizeGB: 1
